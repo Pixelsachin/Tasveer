@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
+from .models import img_load
 
 # Create your views here.
 # def home(request):
@@ -69,10 +70,16 @@ def login_view(request):
 
 
 def index(request):
-    return render(request, "index.html")
+    images = img_load.objects.all()
+    return render(request, "index.html", {"images": images})
 
 
 def logout_view(request):
     logout(request)
     messages.success(request, "Logged Out Successfully!!")
     return redirect("signup")
+
+
+# def all_image(request):
+#     images = img_load.objects.all()
+#     return render("index", {"images": images})

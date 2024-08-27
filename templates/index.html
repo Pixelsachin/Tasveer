@@ -1,45 +1,17 @@
 {% extends "layout.html" %}
+{% comment %} {% load static %} {% endcomment %}
 
 {% block content %}
 <H1>you are on home page wellcome</H1>
-{% comment %} 
-<div class="container mt-5">
-    <h1 class="text-center mb-4">Signup</h1>
-    <form action="/login" method="post" >
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" name="username"  placeholder="Enter your username" required>
-        </div>
-        
-        <div class="mb-3">
-            <label for="reg_no" class="form-label">Registration No</label>
-            <input type="number" class="form-control" id="reg_no" name="reg_no" placeholder="Enter your registration number" required>
-        </div>
-        
-        <div class="mb-3">
-            <label for="phone" class="form-label">Phone No</label>
-            <input type="number" class="form-control" id="phone" name="phone" maxlength="10" placeholder="Enter your phone number" required>
-        </div>
-        
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
-        </div>
-        
-        <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
-        </div>
-        
-        <div class="mb-3">
-            <label for="password2" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm your password" required>
-        </div>
-        
-        <button type="submit" class="btn btn-primary w-20">Signup</button>
-    </form>
-</div> {% endcomment %}
+{% for imge in images %}
+<div  style="height:20px; width:20px;" class="container mt-3">
+    <img src="{{imge.image.url}}" alt="images" class="rounded" alt="Cinque Terre" width="304" height="236">
+
+</div>
+
+
+{% endfor %}
+
 {% endblock content %}
 
 
