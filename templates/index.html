@@ -1,18 +1,21 @@
 {% extends "layout.html" %}
-{% comment %} {% load static %} {% endcomment %}
 
 {% block content %}
-<H1>you are on home page wellcome</H1>
-{% for imge in images %}
-<div  style="height:20px; width:20px;" class="container mt-3">
-    <img src="{{imge.image.url}}" alt="images" class="rounded" alt="Cinque Terre" width="304" height="236">
-
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Welcome to the Home Page</h1>
+    <div class="row">
+        {% for imge in images %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <img src="{{ imge.image.url }}" class="card-img-top rounded" alt="Image">
+                <div class="card-body">
+                    <p class="card-text text-center">noting is better than you darling</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
-
-
-{% endfor %}
-
 {% endblock content %}
-
 
 
