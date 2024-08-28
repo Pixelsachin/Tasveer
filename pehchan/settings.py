@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-tu+ge&+wcgy#s3_+c*ywli_yb&2r(ub7jzs^ma1*-$r^@!8c6#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["adharcard.onrender.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "adharcard.onrender.com"]
 
 
 # Application definition
