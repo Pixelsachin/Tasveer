@@ -5,17 +5,15 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from .models import img_load
-
-# Create your views here.
-# def home(request):
-#     return render(request, "auth/signup.html")
+from django.contrib.auth.decorators import login_required
+from .forms import ImageUploadForm
 
 
 def signup(request):
     if request.method == "POST":
         username = request.POST["username"]
-        reg_no = request.POST["reg_no"]
-        phone = request.POST["phone"]
+        # reg_no = request.POST["reg_no"]
+        # phone = request.POST["phone"]
         email = request.POST["email"]
         pass1 = request.POST["password"]
         pass2 = request.POST["password2"]
@@ -69,6 +67,7 @@ def login_view(request):
     return render(request, "auth/login.html")
 
 
+@login_required
 def index(request):
     images = img_load.objects.all()
     return render(request, "index.html", {"images": images})
@@ -80,6 +79,12 @@ def logout_view(request):
     return redirect("signup")
 
 
-# def all_image(request):
-#     images = img_load.objects.all()
-#     return render("index", {"images": images})
+def img_handle(request):
+    if request.method == "POST":
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect("index")
+    else:
+        form = ImageUploadForm()
+    return render(request, "index.html", {"form": form})

@@ -3,6 +3,11 @@
 {% block content %}
 <div class="container mt-5">
     <h1 class="text-center mb-4">Welcome to the Home Page</h1>
+    <form action="{% url "img_handle" %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
     <div class="row">
         {% for imge in images %}
         <div class="col-md-4 mb-4">
