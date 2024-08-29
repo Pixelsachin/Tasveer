@@ -27,7 +27,7 @@ def signup(request):
             return render(request, "auth/signup.html")
 
         myuser = User.objects.create_user(username, email, pass1)
-        myuser.is_active = False
+        myuser.is_active = True
         myuser.save()
         messages.success(
             request,
