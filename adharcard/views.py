@@ -88,3 +88,7 @@ def img_handle(request):
     else:
         form = ImageUploadForm()
     return render(request, "index.html", {"form": form})
+
+
+def welcome(request):
+    return render(request, "welcome/index.html")
