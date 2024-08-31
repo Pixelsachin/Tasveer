@@ -1,0 +1,331 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0%;
+    padding: 0px;
+}
+
+/* Header Styling */
+header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff; /* Light background color */
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for header */
+}
+
+.logo { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    background-color: #ffffff; /* Adjust background color if needed */
+}
+
+.logo img {
+    max-width: 100%;
+    height: auto;
+    width: auto; /* Ensure the image maintains its aspect ratio */
+    max-height: 100px; /* Adjust to control the height of the logo */
+    object-fit: cover; /* Makes sure the image scales properly */
+    border-radius: 50%; /* Makes the logo circular */
+    border: 2px solid #ddd; /* Optional: add a border around the circle */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional: add shadow for better visibility */
+}
+
+logo img:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Centered site title styling with cool effect */
+.site-title {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 5rem;
+    font-weight: bold;
+    color: #2c3e50; /* Text color */
+    font-family: 'Arial', sans-serif;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Cool text effect */
+.site-title::before {
+    content: "FRENDS SPACE";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #3498db; /* Effect color */
+    transform: translateX(-100%);
+    animation: slide-in 2s ease-in-out infinite;
+}
+
+@keyframes slide-in {
+    0% { transform: translateX(-100%); }
+    50% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+}
+
+nav {
+    flex: 1;
+    text-align: center;
+}
+
+.menu {
+    font-size: 1.5em;
+    list-style-type: none;
+    display: flex;
+    justify-content: right;
+    flex-wrap: wrap;
+}
+
+.menu li {
+    margin: 0 15px;
+}
+
+.menu li a {
+    color: #3498db; /* Base color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+    padding: 0.5rem 1rem;
+    border-radius: 25px; /* Rounded corners */
+    background-color: #ecf0f1; /* Light background */
+    transition: all 0.3s ease; /* Smooth transition */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+    display: inline-block;
+}
+
+.menu li a:hover {
+    color: #ffffff; /* Text color changes on hover */
+    background-color: #3498db; /* Background color changes on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+.menu li a:focus {
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.4); /* Custom focus outline */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+    }
+
+    .logo {
+        width: 80px; /* Slightly smaller logos for mobile */
+    }
+
+    .site-title {
+        margin: 1rem 0;
+    }
+
+    nav {
+        margin: 1rem 0;
+    }
+
+    .menu {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu li {
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 0.5rem;
+    }
+
+    .logo {
+        width: 60px; /* Even smaller logos for very small screens */
+    }
+}
+
+.background-container {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    background-image: url('friends.jpg'); /* Replace with your image URL */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome-text {
+    color: white;
+    text-align: bottom;
+    padding: 20px;
+}
+
+.top-text, .bottom-text {
+    font-size: 3rem;
+    margin: 10px 0;
+}
+
+.center-text {
+    font-size: 6em;
+    font-weight: bolder;
+    margin: 20px 0;
+}
+
+@media screen and (max-width: 768px) {
+    .top-text, .bottom-text {
+        font-size: 1.5rem;
+    }
+    
+    .center-text {
+        font-size: 3rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .top-text, .bottom-text {
+        font-size: 1.2rem;
+    }
+    
+    .center-text {
+        font-size: 2.5rem;
+    }
+}
+
+h1 {
+    font-family: "Montserrat Medium";
+    max-width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    transform: scale(0.94);
+    animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
+    line-height: 1.4;
+}
+
+@keyframes scale {
+    100% {
+        transform: scale(1);
+    }
+}
+
+span {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(4px);
+    margin: 5px 0; /* Add margin for spacing between lines */
+}
+
+span:nth-child(1) {
+    animation: fade-in 0.8s 0.1s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+/* Apply similar animation for other spans with increasing delay */
+span:nth-child(2) { animation: fade-in 0.8s 0.2s forwards cubic-bezier(0.11, 0, 0.5, 0); }
+span:nth-child(3) { animation: fade-in 0.8s 0.3s forwards cubic-bezier(0.11, 0, 0.5, 0); }
+span:nth-child(4) { animation: fade-in 0.8s 0.4s forwards cubic-bezier(0.11, 0, 0.5, 0); }
+span:nth-child(5) { animation: fade-in 0.8s 0.5s forwards cubic-bezier(0.11, 0, 0.5, 0); }
+span:nth-child(6) { animation: fade-in 0.8s 0.6s forwards cubic-bezier(0.11, 0, 0.5, 0); }
+span:nth-child(7) { animation: fade-in 0.8s 0.7s forwards cubic-bezier(0.11, 0, 0.5, 0); }
+span:nth-child(8) { animation: fade-in 0.8s 0.8s forwards cubic-bezier(0.11, 0, 0.5, 0); }
+span:nth-child(9) { animation: fade-in 0.8s 0.9s forwards cubic-bezier(0.11, 0, 0.5, 0); }
+span:nth-child(10) { animation: fade-in 0.8s 1s forwards cubic-bezier(0.11, 0, 0.5, 0); }
+
+@keyframes fade-in {
+    100% {
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .text {
+        font-size: 1.2rem;
+        text-align: left;
+    }
+    
+    span {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .text {
+        font-size: 1rem;
+        text-align: left;
+    }
+    
+    span {
+        font-size: 0.9rem;
+    }
+}
+
+.colorful-drip-footer {
+    position: relative;
+    background: white;
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+    overflow: hidden;
+}
+
+.strip {
+    position: absolute;
+    bottom: 0;
+    width: 6.66%;
+    height: 100px;
+    background: rgb(193, 8, 8);
+    animation: dripDown 4s infinite ease-in-out;
+    z-index: 1;
+}
+
+.strip1 { left: 0%; background: #ff6f61; animation-delay: 0s; }
+.strip2 { left: 6.66%; background: #ffb6c1; animation-delay: 0.2s; }
+.strip3 { left: 13.32%; background: #ff3e3e; animation-delay: 0.4s; }
+.strip4 { left: 19.98%; background: #ffa07a; animation-delay: 0.6s; }
+.strip5 { left: 26.64%; background: #ff6347; animation-delay: 0.8s; }
+.strip6 { left: 33.3%; background: #ff4500; animation-delay: 1s; }
+.strip7 { left: 39.96%; background: #ff1493; animation-delay: 1.2s; }
+.strip8 { left: 46.62%; background: #ff69b4; animation-delay: 1.4s; }
+.strip9 { left: 53.28%; background: #ff1493; animation-delay: 1.6s; }
+.strip10 { left: 59.94%; background: #ff4500; animation-delay: 1.8s; }
+.strip11 { left: 66.6%; background: #ff6347; animation-delay: 2s; }
+.strip12 { left: 73.26%; background: #ffa07a; animation-delay: 2.2s; }
+.strip13 { left: 79.92%; background: #ff3e3e; animation-delay: 2.4s; }
+.strip14 { left: 86.58%; background: #ffb6c1; animation-delay: 2.6s; }
+.strip15 { left: 93.24%; background: #ff6f61; animation-delay: 2.8s; }
+
+@keyframes dripDown {
+    0% {
+        height: 0;
+        opacity: 1;
+    }
+    50% {
+        height: 100px;
+        opacity: 0.8;
+    }
+    100% {
+        height: 0;
+        opacity: 1;
+    }
+}

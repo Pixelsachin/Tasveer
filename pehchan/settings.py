@@ -27,12 +27,7 @@ SECRET_KEY = "django-insecure-tu+ge&+wcgy#s3_+c*ywli_yb&2r(ub7jzs^ma1*-$r^@!8c6#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "localhost",
-    "adharcard.onrender.com",
-    "tasveer-4vyu.onrender.com",
-]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -81,15 +76,15 @@ WSGI_APPLICATION = "pehchan.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {"default": dj_database_url.config(default=os.getenv("DATABASE_URL"))}
+# DATABASES = {"default": dj_database_url.config(default=os.getenv("DATABASE_URL"))}
 
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
 
 # Password validation

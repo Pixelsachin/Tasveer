@@ -1,6 +1,3 @@
 .venv
 
-static
-welcome
-db.sqlite3
-.sqlite3
+

@@ -7,6 +7,8 @@ from django.conf import settings
 from .models import img_load
 from django.contrib.auth.decorators import login_required
 from .forms import ImageUploadForm
+from django.utils import timezone
+from datetime import timedelta
 
 
 def signup(request):
@@ -70,19 +72,21 @@ def login_view(request):
 @login_required
 def index(request):
     images = img_load.objects.all()
+    delete_expired_images()
     return render(request, "index.html", {"images": images})
 
 
 def logout_view(request):
     logout(request)
     messages.success(request, "Logged Out Successfully!!")
-    return redirect("signup")
+    return redirect("welcome")
 
 
 def img_handle(request):
     if request.method == "POST":
         form = ImageUploadForm(request.POST, request.FILES)
         if form.is_valid():
+
             form.save()
             return redirect("index")
     else:
@@ -92,3 +96,12 @@ def img_handle(request):
 
 def welcome(request):
     return render(request, "welcome/index.html")
+
+
+def delete_expired_images():
+    expiration_time = timezone.now() - timedelta(minutes=60)
+    expired_images = img_load.objects.filter(uploaded_at__lt=expiration_time)
+    for image in expired_images:
+        image.image.delete(save=False)
+        image.delete()
+    return
