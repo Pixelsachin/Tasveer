@@ -1,27 +1,76 @@
 {% extends "layout.html" %}
 
 {% block styling %}
-body{
-    background: #283048;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #859398, #283048);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #859398, #283048); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-     
-
-}
-
+body {
+    background: #283048;
+    background: -webkit-linear-gradient(to right, #859398, #283048);
+    background: linear-gradient(to right, #859398, #283048);
+    transition: background 0.5s ease-in-out;
+    background: blur(5px);
+  }
+  /* Color of the links BEFORE scroll */
+  .navbar-scroll .nav-link,
+  .navbar-scroll .navbar-toggler-icon,
+  .navbar-scroll .navbar-brand {
+      color: #fff;
+  }
+  
+  /* Color of the links AFTER scroll */
+  .navbar-scrolled .nav-link,
+  .navbar-scrolled .navbar-toggler-icon,
+  .navbar-scrolled .navbar-brand {
+      color: #fff;
+  }
+  
+  /* Color of the navbar AFTER scroll */
+  .navbar-scroll,
+  .navbar-scrolled {
+      background-color: #cbbcb1;
+  }
+  
+  .mask-custom {
+      backdrop-filter: blur(5px);
+      background-color: rgba(255, 255, 255, .15);
+  }
+  
+  .navbar-brand {
+      font-size: 1.75rem;
+      letter-spacing: 3px;
+  }
 {% endblock styling %}
 
 {% block navbar %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{% url 'signup' %}">signup</a>
-    <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ml-auto">
+<header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top mask-custom shadow-0">
+      <div class="container">
+        <a class="navbar-brand" href="#!"><span style="color: #fff;">FRIX</span></a>
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto">
             <li class="nav-item">
-                <a class="nav-link btn btn-danger text-white" href="{% url 'logout_view' %}">Logout</a>
+              <a class="nav-link" href="#!">ABOUT US</a>
             </li>
-        </ul>
-    </div>
-</nav>
+           
+          </ul>
+          <ul class="navbar-nav d-flex flex-row">
+            <li class="nav-item me-3 me-lg-0">
+              <a class="nav-link" href="#!">
+                <i class="fas fa-shopping-cart"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar -->
+  
+   
+  </header>
+
+
 {% endblock navbar %}
 
 {% block content %}
@@ -46,7 +95,7 @@ body{
             <div class="card shadow-sm">
                 <img src="{{ imge.image.url }}" class="card-img-top rounded" alt="Image">
                 <div class="card-body">
-                    <p class="card-text text-center">Nothing is better than you darling</p>
+                    <p class="card-text text-center">Nothing is better than you </p>
                 </div>
             </div>
         </div>
@@ -57,4 +106,29 @@ body{
         {% endfor %}
     </div>
 </div>
+
+
 {% endblock content %}
+{% block js %}
+function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+function changeBackgroundColor() {
+    const body = document.body;
+    const newColor1 = getRandomColor();
+    const newColor2 = getRandomColor();
+    
+    // Apply the new gradient background
+    body.style.background = `linear-gradient(to right, ${newColor1}, ${newColor2})`;
+}
+
+// Change the background color on page load
+window.addEventListener('load', changeBackgroundColor);
+
+{% endblock js %}
