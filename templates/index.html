@@ -6,109 +6,134 @@ body {
     background: -webkit-linear-gradient(to right, #859398, #283048);
     background: linear-gradient(to right, #859398, #283048);
     transition: background 0.5s ease-in-out;
-    background: blur(5px);
-  }
-  /* Color of the links BEFORE scroll */
-  .navbar-scroll .nav-link,
-  .navbar-scroll .navbar-toggler-icon,
-  .navbar-scroll .navbar-brand {
-      color: #fff;
-  }
-  
-  /* Color of the links AFTER scroll */
-  .navbar-scrolled .nav-link,
-  .navbar-scrolled .navbar-toggler-icon,
-  .navbar-scrolled .navbar-brand {
-      color: #fff;
-  }
-  
-  /* Color of the navbar AFTER scroll */
-  .navbar-scroll,
-  .navbar-scrolled {
-      background-color: #cbbcb1;
-  }
-  
-  .mask-custom {
-      backdrop-filter: blur(5px);
-      background-color: rgba(255, 255, 255, .15);
-  }
-  
-  .navbar-brand {
-      font-size: 1.75rem;
-      letter-spacing: 3px;
-  }
+}
+
+.navbar-scroll .nav-link,
+.navbar-scroll .navbar-toggler-icon,
+.navbar-scroll .navbar-brand,
+.navbar-scrolled .nav-link,
+.navbar-scrolled .navbar-toggler-icon,
+.navbar-scrolled .navbar-brand {
+    color: #fff;
+}
+
+.navbar-scroll,
+.navbar-scrolled {
+    background-color: #cbbcb1;
+}
+
+.mask-custom {
+    backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, .15);
+}
+
+.navbar-brand {
+    font-size: 1.75rem;
+    letter-spacing: 3px;
+}
+.img-responsive {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.card-img-top {
+  max-height: 400px; /* Adjust as needed */
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 20px;
+}
+
+.card:hover .overlay {
+  opacity: 1;
+}
+
 {% endblock styling %}
 
 {% block navbar %}
 <header>
-    <!-- Navbar -->
+    <!-- Navbar remains unchanged as per your request -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top mask-custom shadow-0">
-      <div class="container">
-        <a class="navbar-brand" href="#!"><span style="color: #fff;">FRIX</span></a>
-        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fas fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#!">ABOUT US</a>
-            </li>
-           
-          </ul>
-          <ul class="navbar-nav d-flex flex-row">
-            <li class="nav-item me-3 me-lg-0">
-              <a class="nav-link" href="#!">
-                <i class="fas fa-shopping-cart"></i>
-              </a>
-            </li>
-          </ul>
+        <div class="container">
+            <a class="navbar-brand" href="#!"><span style="color: #fff;">FreX</span></a>
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#!">ABOUT US</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav d-flex flex-row">
+                    <li class="nav-item me-3 me-lg-0">
+                        <a class="nav-link" href="#!">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
     </nav>
-    <!-- Navbar -->
-  
-   
-  </header>
-
-
+</header>
 {% endblock navbar %}
 
 {% block content %}
-<div class="container mt-5">
-    <h1 class="text-center mb-4">Welcome to the Home Page</h1>
-    
-    <div class="row mb-4">
-        <div class="col-md-12">
-            <form action="{% url 'img_handle' %}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="form-group">
-                    {{ form.as_p }}
-                </div>
-                <button type="submit" class="btn btn-primary">Upload</button>
-            </form>
-        </div>
-    </div>
-
+<div class="container mt-5 pt-5">
     <div class="row">
-        {% for imge in images %}
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm">
-                <img src="{{ imge.image.url }}" class="card-img-top rounded" alt="Image">
-                <div class="card-body">
-                    <p class="card-text text-center">Nothing is better than you </p>
+        <div class="col-md-6 mb-5">
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <form action="{% url 'img_handle' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            {{ form.image.label_tag }}
+                            {{ form.as_p }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                <div class="row">
+                    {% for imge in images %}
+                    <div class="col-md-20 col-lg-20 mb-4">
+                      <div class="card shadow-sm border-0 position-relative ">
+                          <img src="{{ imge.image.url }}" alt="{{ imge.description }}" class="card-img-top rounded img-responsive">
+                          <div class="overlay d-flex flex-column justify-content-center p-3 text-center">
+                              <h5 class="text-white">{{ imge.description|default:"No Description" }}</h5>
+                              <p class="text-white mt-2">{{ name|default:"naam ka ba ho" }}</p>
+                          </div>
+                      </div>
+                  </div>
+                  
+                    {% empty %}
+                    <div class="col-md-12">
+                        <p class="text-center text-muted">No images available.</p>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-        {% empty %}
-        <div class="col-md-12">
-            <p class="text-center">No images available.</p>
-        </div>
-        {% endfor %}
     </div>
 </div>
-
-
 {% endblock content %}
+
 {% block js %}
 function getRandomColor() {
     const letters = '0123456789ABCDEF';

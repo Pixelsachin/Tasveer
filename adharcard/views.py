@@ -57,7 +57,7 @@ def login_view(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return redirect("index")  # Redirect to the index view
+                return redirect("index")
             else:
                 messages.error(
                     request, "Your account is not active. Please contact admin."
@@ -71,9 +71,10 @@ def login_view(request):
 
 @login_required
 def index(request):
+    name = request.user.username
     images = img_load.objects.all()
     delete_expired_images()
-    return render(request, "index.html", {"images": images})
+    return render(request, "index.html", {"images": images, "name": name})
 
 
 def logout_view(request):
@@ -99,7 +100,7 @@ def welcome(request):
 
 
 def delete_expired_images():
-    expiration_time = timezone.now() - timedelta(minutes=60)
+    expiration_time = timezone.now() - timedelta(minutes=10)
     expired_images = img_load.objects.filter(uploaded_at__lt=expiration_time)
     for image in expired_images:
         image.image.delete(save=False)
