@@ -11,7 +11,7 @@ import os
 
 def filename(value):
     ext = os.path.splitext(value.name)[1]
-    valid_extensions = [".jpg", ".png"]
+    valid_extensions = [".jpg"]
     if not ext.lower() in valid_extensions:
         raise ValidationError("only jpg file can be uploded")
 
@@ -19,5 +19,4 @@ def filename(value):
 class img_load(models.Model):
     image = models.ImageField(upload_to="images/", validators=[filename])
     description = models.CharField(max_length=50, null=True, blank=True)
-
     uploaded_at = models.DateTimeField(default=timezone.now)

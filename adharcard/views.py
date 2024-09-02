@@ -87,7 +87,6 @@ def img_handle(request):
     if request.method == "POST":
         form = ImageUploadForm(request.POST, request.FILES)
         if form.is_valid():
-
             form.save()
             return redirect("index")
     else:
@@ -100,7 +99,7 @@ def welcome(request):
 
 
 def delete_expired_images():
-    expiration_time = timezone.now() - timedelta(minutes=10)
+    expiration_time = timezone.now() - timedelta(minutes=60)
     expired_images = img_load.objects.filter(uploaded_at__lt=expiration_time)
     for image in expired_images:
         image.image.delete(save=False)
