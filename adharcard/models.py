@@ -18,5 +18,5 @@ def filename(value):
 
 class img_load(models.Model):
     image = models.ImageField(upload_to="images/", validators=[filename])
-    description = models.CharField(max_length=50, null=True, blank=True)
+    description = models.TextField(max_length=255, null=True, blank=True)
     uploaded_at = models.DateTimeField(default=timezone.now)

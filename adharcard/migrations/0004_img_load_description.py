@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('adharcard', '0003_alter_img_load_image'),
+        ("adharcard", "0003_alter_img_load_image"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='img_load',
-            name='description',
-            field=models.CharField(blank=True, default='chin tapak dam dam', max_length=10, null=True),
+            model_name="img_load",
+            name="description",
+            field=models.CharField(
+                blank=True, default="chin tapak dam dam", max_length=255, null=True
+            ),
         ),
     ]
