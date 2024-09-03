@@ -36,7 +36,12 @@ SECRET_KEY = env("SECRET_KEY", default="unsafe-secret-key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "aws-0-ap-south-1.pooler.supabase.com"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "aws-0-ap-south-1.pooler.supabase.com"
+    "statistical-bathsheba-frixbytes-456f5ff4.koyeb.app/",
+]
 
 
 # Application definition
