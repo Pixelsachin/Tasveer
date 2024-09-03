@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 
+
 # import environ
 # import dj_database_url
 from pathlib import Path

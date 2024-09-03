@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.core.mail import send_mail
-from django.conf import settings
+
+# from django.conf import settings
+from pehchan import settings
 from .models import img_load
 from django.contrib.auth.decorators import login_required
 from .forms import ImageUploadForm
@@ -35,12 +36,6 @@ def signup(request):
             request,
             "Your account has been created successfully. Please wait for admin approval.",
         )
-
-        # subject = "New User Registration"
-        # message = f"New user {username} has registered. Please approve their account."
-        # from_email = settings.EMAIL_HOST_USER
-        # to_email = settings.ADMIN_EMAIL
-        # send_mail(subject, message, from_email, [to_email])
 
         return redirect("login_view")
     return render(request, "auth/signup.html")
