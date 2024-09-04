@@ -90,7 +90,7 @@ def img_handle(request):
 
 
 def welcome(request):
-    return render(request, "welcome/index.html")
+    return render(request, "welcome/welcome.html")
 
 
 def delete_expired_images():
