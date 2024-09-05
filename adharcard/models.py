@@ -2,6 +2,8 @@ from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 import os
+from django.contrib.auth.models import User
+
 
 # from django.core.validators import validate_image_file_extension
 

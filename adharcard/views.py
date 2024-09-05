@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.core.exceptions import ValidationError
 
 # from django.conf import settings
 from pehchan import settings
@@ -60,12 +61,14 @@ def login_view(request):
                 return render(request, "auth/login.html")
         else:
             messages.error(request, "Invalid username or password")
-            return redirect(request, "index")
+            return redirect("login_view")
     return render(request, "auth/login.html")
 
 
-@login_required
+# @login_required
 def index(request):
+    if not request.user.is_authenticated:
+        return redirect("welcome")
     name = request.user.username
     images = img_load.objects.all()
     delete_expired_images()
@@ -78,12 +81,18 @@ def logout_view(request):
     return redirect("welcome")
 
 
+@login_required
 def img_handle(request):
     if request.method == "POST":
         form = ImageUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            img_instance = form.save(commit=False)
+            img_instance.user = (
+                request.user
+            )  # Associate the logged-in user with the image
+            img_instance.save()
             return redirect("index")
+
     else:
         form = ImageUploadForm()
     return render(request, "index.html", {"form": form})
@@ -94,7 +103,7 @@ def welcome(request):
 
 
 def delete_expired_images():
-    expiration_time = timezone.now() - timedelta(minutes=60)
+    expiration_time = timezone.now() - timedelta(hours=12)
     expired_images = img_load.objects.filter(uploaded_at__lt=expiration_time)
     for image in expired_images:
         image.image.delete(save=False)

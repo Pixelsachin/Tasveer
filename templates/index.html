@@ -63,6 +63,10 @@ body {
 }
 
 {% endblock styling %}
+{% block title %}
+Tasveer
+{% endblock title %}
+
 
 {% block navbar %}
 <header>
@@ -81,18 +85,18 @@ body {
                 </ul>
                 <ul class="navbar-nav d-flex flex-row">
                     <li class="nav-item me-3 me-lg-0">
-                        <a class="nav-link btn btn-danger" href=" {% url "logout_view" %}"><span>LOGOUT</span>
+                        <a class="nav-link btn btn-danger" href=" {% url "logout_view" %}">LOGOUT
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                     </li>
                 </ul>
-                <ul class="navbar-nav d-flex flex-row">
+                {% comment %} <ul class="navbar-nav d-flex flex-row">
                     <li class="nav-item me-3 me-lg-0">
                         <a class="nav-link" href="#!">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                     </li>
-                </ul>
+                </ul> {% endcomment %}
             </div>
         </div>
     </nav>
@@ -100,6 +104,12 @@ body {
 {% endblock navbar %}
 
 {% block content %}
+<div class="container mt-5 pt-5 text-start">
+    <h1 class="display-6 fw-bold text-white text-uppercase shadow-lg p-3 rounded" style="letter-spacing: 3px;">
+        {{ name }}
+    </h1>
+</div>
+
 <div class="container mt-5 pt-5">
     <div class="row">
         <div class="col-md-6 mb-5">
@@ -124,14 +134,14 @@ body {
                           <img src="{{ imge.image.url }}" alt="{{ imge.description }}" class="card-img-top rounded img-responsive">
                           <div class="overlay d-flex flex-column justify-content-center p-3 text-center">
                               <h5 class="text-white">{{ imge.description|default:"No Description" }}</h5>
-                              <p class="text-white mt-2">{{ name|default:"naam ka ba ho" }}</p>
+                              <p class="text-white mt-2">{{  imge.uploaded_at|date:"H:i a"  }}</p>
                           </div>
                       </div>
                   </div>
                   
                     {% empty %}
                     <div class="col-md-12">
-                        <p class="text-center text-muted">No images available.</p>
+                        <p class="text-center text-white ">{{name}} pajji kuch uload karo,</p>
                     </div>
                     {% endfor %}
                 </div>
