@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import img_load
+from .models import *
 
 # Register your models here.
 admin.site.register(img_load)
+admin.site.register(userprofile)

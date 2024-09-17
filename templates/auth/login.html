@@ -23,15 +23,17 @@
         <button type="submit" class="btn btn-primary w-20">login</button>
         
         {% if messages %}
-<div class="alert-container">
-    {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
+        <div class="alert-container">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade border border-dark shadow-lg show bg-transparent opacity-75" role="alert">
+                <div>
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+            {% endfor %}
         </div>
-    {% endfor %}
-</div>
-
-{% endif %}
+        {% endif %}
        </form>
 </div>
 

@@ -10,6 +10,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env("SECRET_KEY", default="unsafe-secret-key")
 DEBUG = True  # Set to False in production
 
+WEBPUSH_SETTINGS = {
+    "VAPID_PUBLIC_KEY": "BEkjdUABTGsVzUqutIHXiqzma2S7YlyBrzVx0QJ5q1hxK-9EofJudxJ4WDYpe31SzTKhDGFZDXFDcuEyErCir3Y",
+    "VAPID_PRIVATE_KEY": "jz0KSLBOZBjsFUlo1rd8eePlEptKZR2oy71EAX-lpQE",
+    "VAPID_ADMIN_EMAIL": "mailto:bankchor23@gmail.com",
+}
+
+
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 
 INSTALLED_APPS = [
@@ -20,6 +27,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "adharcard",
+    "webpush",
 ]
 
 MIDDLEWARE = [
@@ -55,14 +63,22 @@ WSGI_APPLICATION = "pehchan.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": env("DB_NAME"),
-        "USER": env("DB_USER"),
-        "PASSWORD": env("DB_PASSWORD"),
-        "HOST": env("DB_HOST"),
-        "PORT": env("DB_PORT"),
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         "NAME": env("DB_NAME"),
+#         "USER": env("DB_USER"),
+#         "PASSWORD": env("DB_PASSWORD"),
+#         "HOST": env("DB_HOST"),
+#         "PORT": env("DB_PORT"),
+#     }
+# }
 
 AUTH_PASSWORD_VALIDATORS = [
     {

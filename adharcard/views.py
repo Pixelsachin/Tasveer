@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -6,11 +7,14 @@ from django.core.exceptions import ValidationError
 
 # from django.conf import settings
 from pehchan import settings
-from .models import img_load
+from .models import img_load, userprofile
 from django.contrib.auth.decorators import login_required
-from .forms import ImageUploadForm
+from .forms import ImageUploadForm, ProfileForm
 from django.utils import timezone
 from datetime import timedelta
+
+# notifiction
+from webpush import send_user_notification
 
 
 def signup(request):
@@ -18,7 +22,7 @@ def signup(request):
         username = request.POST["username"]
         # reg_no = request.POST["reg_no"]
         # phone = request.POST["phone"]
-        email = request.POST["email"]
+        email = request.POST["email"].lower()
         pass1 = request.POST["password"]
         pass2 = request.POST["password2"]
 
@@ -35,7 +39,7 @@ def signup(request):
         myuser.save()
         messages.success(
             request,
-            "Your account has been created successfully. Please wait for admin approval.",
+            "Your account has been created successfully.login",
         )
 
         return redirect("login_view")
@@ -68,7 +72,9 @@ def login_view(request):
 # @login_required
 def index(request):
     if not request.user.is_authenticated:
-        return redirect("welcome")
+        messages.error(request, "signup first to get acces  to dashboard")
+        return redirect("signup")
+
     name = request.user.username
     images = img_load.objects.all()
     delete_expired_images()
@@ -103,9 +109,43 @@ def welcome(request):
 
 
 def delete_expired_images():
-    expiration_time = timezone.now() - timedelta(hours=12)
+    expiration_time = timezone.now() - timedelta(minutes=1)
     expired_images = img_load.objects.filter(uploaded_at__lt=expiration_time)
     for image in expired_images:
-        image.image.delete(save=False)
+        image.image.delete(save=True)
         image.delete()
     return
+
+
+def aboutus(request):
+    return render(request, "sections/about.html")
+
+
+@login_required
+def profile(request):
+    users = User.objects.all()
+
+    return render(request, "sections/user/profile.html", {"users": users})
+
+
+@login_required
+def userpf(request):
+    profiles, created = userprofile.objects.get_or_create(user=request.user)
+    if request.method == "POST":
+        form = ProfileForm(request.POST, request.FILES, instance=profiles)
+        if form.is_valid():
+            form.save()
+            return redirect("index")
+    else:
+        form = ProfileForm(instance=profiles)
+    return render(
+        request, "sections/user/userpfile.html", {"form": form, "user": request.user}
+    )
+
+
+# Create your views here.
+def testing(request):
+    payload = {"head": "Welcome!", "body": "Hello World"}
+    send_user_notification(user=request.user, payload=payload, ttl=1000)
+    webpush = {"group": "aman"}
+    return render(request, "testing.html", {"webpush": webpush})

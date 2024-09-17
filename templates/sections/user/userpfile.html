@@ -1,0 +1,108 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block styling %}
+.avatar-wrapper {
+    position: relative;
+    width: 250px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.avatar-image {
+    width: 100%;
+    border-radius: 10px;
+    display: block;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+.avatar-wrapper:hover .overlay {
+    opacity: 1;
+}
+
+.upload-btn {
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.file-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+{% endblock styling %}
+
+{% block content %}
+<section class="w-100 vh-100 px-4 py-5 d-flex align-items-center" style="background-color: #9de2ff; border-radius: .5rem .5rem 0 0;">
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8 col-xl-7">
+                <div class="card" style="border-radius: 15px;">
+                    <div class="card-body p-5">
+                        <div class="d-flex flex-column flex-md-row">
+                            <div class="flex-shrink-0 text-center text-md-start">
+
+                                <!-- Form for Avatar Upload -->
+                                <form action="{% url 'userpf' %}" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    
+                                    <div class="container position-relative">
+                                        <!-- Image Display -->
+                                        <div class="avatar-wrapper">
+                                            {% if form.instance.avatar %}
+                                                <img src="{% if form.instance.avatar.url %}{{ form.instance.avatar.url }}{% else %}{% static 'op_boy.png' %}{% endif %}"
+                                                    alt="only jpg file can be uploaded" class="img-fluid mb-3 mb-md-0 avatar-image">
+                                            {% else %}
+                                                <img src="{% static 'op_boy.png' %}"
+                                                    alt="Default Avatar" class="img-fluid mb-3 mb-md-0 avatar-image">
+                                            {% endif %}
+                                            
+                                            <!-- Hidden File Upload Input -->
+                                            <div class="overlay">
+                                                <label for="id_avatar" class="upload-btn">Click to upload</label>
+                                                <input type="file" name="avatar" id="id_avatar" class="form-control file-input">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                            </div>
+                            
+                            <div class="flex-grow-1 ms-md-5 text-center text-md-start">
+                                <!-- Username -->
+                                <h3 class="mb-2 text-uppercase">{{ user.username }}</h3>
+                                <p class="mb-2 text-uppercase">{{ user.email }}</p>
+                                
+                                <!-- Bio -->
+                                <p class="mb-3">{{ form.instance.bio }}</p>
+
+                                <!-- Update Button -->
+                                <button type="submit" class="btn btn-primary mt-3">Upload new pic</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

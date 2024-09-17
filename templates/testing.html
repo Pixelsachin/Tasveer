@@ -1,0 +1,9 @@
+{% comment %} {% extends "layout.html" %} {% endcomment %}
+{% load webpush_notifications %}
+{% block head %}    
+
+{% webpush_header %}
+
+{% endblock head %} 
+<h1>hello world</h1>
+{% webpush_button with_class="btn btn-outline-info" %}

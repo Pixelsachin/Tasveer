@@ -2,8 +2,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% block head %}
+    
+    {% endblock head %}
   <title> {% block title %}
-    layout page
+    FriXBytes
     
     {% endblock title %}
   </title>
@@ -19,6 +22,45 @@
 
 </head>
 <body>
+  <header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{% url "index" %}">
+                <span class="brand-text">FreX</span>
+                <i class="fas fa-star brand-icon ms-2"></i> <!-- Optional icon -->
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link " href="{% url 'aboutus' %}">ABOUT US</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li><a class="nav-link btn btn-outline-danger me-2" href="{% url 'profile' %}">
+                        <i class="fas fa-sign-out-alt"></i> Profile
+                    </a></li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-danger me-2" href="{% url 'userpf' %}">
+                            <i class="fas fa-sign-out-alt"></i> {{name}}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-danger me-2" href="{% url 'logout_view' %}">
+                            <i class="fas fa-sign-out-alt"></i> LOGOUT
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
   {% block navbar %}
 
 
